@@ -159,7 +159,6 @@ Token Token_stream::get()
         case '+':
         case '-':
         case '*':
-        //case 'k':
         case '/':
         case '%':
         case ',':
@@ -264,7 +263,6 @@ double primary()
     Token t = ts.get();
     switch (t.kind)
     {
-        
         case '(':
         {
             double d = expression();
@@ -275,12 +273,12 @@ double primary()
         case 's':
         {
             t = ts.get();
-
+            if (t,kind !='(') error("'(' expected");
             double d = expression();
 
-            if (d < 0) error("Minus sqaure is not defined.")
-                ;
+            if (d < 0) error("Minus sqaure is not defined.");
             t = ts.get();
+            if (t,kind !=')') error("')' expected");
 
             return sqrt(d);
         }
@@ -322,10 +320,7 @@ double term()
     {
         switch (t.kind)
         {
-            /*case 'k':
-                left *= 1000;
-                t = ts.get();
-                break; */
+           
             case '*':
                 left *= primary();
                 t = ts.get();
